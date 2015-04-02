@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta name="csrf-token" content="{{csrfToken}}"> -->
+  <title>Home - Hackathon Starter</title>
+  <link rel="stylesheet" href="/assets/main.css" />
+</head>
+<body>
+	{{>header}}
+	<div class="container">
+		{{>flash}}
+		{{{body}}}
+	</div>
+	{{>footer}}
+
+  <script src="/assets/lib/jquery-2.1.3.min.js"></script>
+	<script src="/assets/lib/bootstrap.min.js"></script>
+	<script src="/assets/main.js"></script>
+	<script src="/assets/application.js"></script>
+</body>
+</html>
