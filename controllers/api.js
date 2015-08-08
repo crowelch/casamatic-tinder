@@ -749,10 +749,15 @@ exports.makeDecision = function (req, res) {
     }
 
     exports.getLikedProperties = function (req, res, next) {
-        var LikedProperties = [];
+        var likedProperties = [];
         var decisions = req.body.yesVotes;
 
         if (decisions) {
-            
+            decisions.forEach(function (value, index, arr) {
+                likedProperties.push()
+            });
+
+            res.send(decisions);
         }
     }
+
