@@ -31,6 +31,7 @@ var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
 var swipeController = require('./controllers/swipe');
+var preferenceController = require('./controllers/preferences');
 
 /**
  * API keys and Passport configuration.
@@ -100,7 +101,7 @@ var csrfProtection = csrf({cookie: true});
 /**
  * Primary app routes.
  */
-app.get('/', csrfProtection, homeController.index);
+//app.get('/', csrfProtection, homeController.index);
 app.get('/login', csrfProtection, userController.getLogin);
 app.post('/login', csrfProtection, userController.postLogin);
 app.get('/logout', csrfProtection, userController.logout);
@@ -118,6 +119,7 @@ app.post('/account/password', passportConf.isAuthenticated, userController.postU
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', csrfProtection, passportConf.isAuthenticated, userController.getOauthUnlink);
 app.get('/swipe', swipeController.swipe);
+app.get('/', csrfProtection, preferenceController.preferences);
 
 /**
  * API examples routes.
