@@ -31,6 +31,7 @@ var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
 var swipeController = require('./controllers/swipe');
+var preferenceController = require('./controllers/preferences');
 
 /**
  * API keys and Passport configuration.
