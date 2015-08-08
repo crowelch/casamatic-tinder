@@ -698,10 +698,10 @@ exports.makeDecision = function (req, res) {
     if (req.user) {
         User.findById(req.user.id, function (err, user) {
             if (err) return console.log(err);
-            if (req.body.yesDecision) {
-                user.profile.yesVotes.push(req.body.propertyId);
+            if (req.params.decision) {
+                user.profile.yesVotes.push(req.params.id);
             } else {
-                user.profile.noVotes.push(req.body.propertyId);
+                user.profile.noVotes.push(req.params.id);
             }
             user.save(function (err) {
                 if (err) return console.log(err);
@@ -739,5 +739,12 @@ exports.makeDecision = function (req, res) {
                 res.send(houses);
             });
         });
+    }
+
+    exports.getHouse = function (req, res, next) {
+        var user = req.user;
+        if (user) {
+
+        }
     }
 }
