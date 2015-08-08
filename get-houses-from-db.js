@@ -1,4 +1,4 @@
-﻿//var zipsMap = require('./zip_locations.json');
+﻿var zipsMap = require('./zip_locations.json');
 var MongoClient = require('mongodb').MongoClient
   , assert = require('assert');
 
@@ -13,11 +13,11 @@ function milesToMeters(miles) {
 }
 
 function getHouses(options, callback) {
-    ////var centerLocation = getLocationByZip(options.centerZip);
-    ////var geoCenter = {
-    ////    type : "Point",
-    ////    coordinates : [parseFloat(centerLocation.Longitude) , parseFloat(centerLocation.Latitude)]
-    ////};
+    var centerLocation = getLocationByZip(options.centerZip);
+    var geoCenter = {
+        type : "Point",
+        coordinates : [parseFloat(centerLocation.longitude) , parseFloat(centerLocation.latitude)]
+    };
     var radiusMeters = milesToMeters(options.milesRadius);
     MongoClient.connect(url, function (err, database) {
         assert.equal(null, err);
@@ -30,15 +30,11 @@ function getHouses(options, callback) {
             FullBathrooms: { $gte: options.minBathrooms },
             loc : {
                 $near: {
-                    $geometry: {
-                        type: "Point" ,
-                        coordinates: [-84.3152 , 39.344258]
-                    },
+                    $geometry: geoCenter,
                     $maxDistance: radiusMeters
                 }
             }
         });
-        ////var matchingHouses = houses.find();
         callback(matchingHouses.limit(25));
 
     });

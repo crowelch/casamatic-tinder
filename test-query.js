@@ -3,8 +3,8 @@
 var options = {
     minPrice: 100000,
     maxPrice: 200000,
-    milesRadius: 3,
-    centerZip: 45040,
+    milesRadius: 1,
+    centerZip: 45219,
     minBedrooms: 3,
     minBathrooms: 2
 };
