@@ -23,8 +23,10 @@ var userSchema = new mongoose.Schema({
         minimumNumBedrooms: { type: Number, default: 1 },
         minimumNumBathrooms: { type: Number, default: 1},
         picture: { type: String, default: '' },
-            latitude: { type: String, default: '' },
-            longitude: {type: String,default: ''}
+        latitude: { type: String, default: '' },
+        longitude: { type: String, default: '' },
+        yesVotes: { type: Array, default: [] },
+        noVotes: {type: Array, default: []}
   },
 
   resetPasswordToken: String,
