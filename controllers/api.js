@@ -717,7 +717,7 @@ exports.getHouses = function (req, res, next) {
             minBathrooms: profile.minimumNumBathrooms
         };
     }
-    
+
     housesFromDb(options, function (housesCursor) {
         housesCursor.toArray(function (err, houses) {
             res.send(houses);

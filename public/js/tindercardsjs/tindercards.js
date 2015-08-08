@@ -24,7 +24,6 @@ Tindercardsjs = (function () {
   exports.card = function (cardid, name, desc, imgpath) {
     
     var jqo;
-    
     /**
      * Returns a jQuery representation of this card
      *
@@ -173,10 +172,12 @@ Tindercardsjs = (function () {
   
 }());
 
-$(document).ready(function () {
+var rocks;
 
+$(document).ready(function () {
+  var newCard;
   $.ajax({
-    url: 'https://casmastic.firebaseio.com/5.json',
+    url: 'http://localhost:3000/api/getHouses',
     dataType: 'json',
     success: function(response) {
       console.log(response)
@@ -187,12 +188,10 @@ $(document).ready(function () {
   var cards = [];
   
   function makeCard(data) {
-    console.log(data.Photos[0].Url);
-    
-    var newCard;
     
     data.forEach(function (elem, ind) {
-      newCard = new Tindercardsjs.card(cards.length, elem.Title, elem.Description, elem.Photos[0].Url);
+      newCard = new Tindercardsjs.card(cards.length, elem.Title, elem.Description, elem.Photos[0].Url, elem);
+      newCard.orig = elem;
       cards.push(newCard);
     });
     
@@ -202,7 +201,7 @@ $(document).ready(function () {
   function render() {
     // Render cards
     Tindercardsjs.render(cards, $('#main'), function (event) {
-      console.log('Swiped ' + event.direction + ', cardid is ' + event.cardid + ' and target is:');
+      
       console.log(event.card);
     });
   }
