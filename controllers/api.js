@@ -709,7 +709,7 @@ exports.makeDecision = function (req, res) {
             });
         });
     }
-
+}
     exports.getHouses = function (req, res, next) {
         var user = req.user;
         var options;
@@ -747,4 +747,12 @@ exports.makeDecision = function (req, res) {
 
         }
     }
-}
+
+    exports.getLikedProperties = function (req, res, next) {
+        var LikedProperties = [];
+        var decisions = req.body.yesVotes;
+
+        if (decisions) {
+            
+        }
+    }
