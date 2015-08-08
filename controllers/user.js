@@ -5,7 +5,6 @@ var nodemailer = require('nodemailer');
 var passport = require('passport');
 var User = require('../models/User');
 var secrets = require('../config/secrets');
-var zipdb = require('zippity-do-dah');
 
 /**
  * GET /login
@@ -114,7 +113,7 @@ exports.getAccount = function(req, res) {
       title: 'Account Management',
       maxDistance: req.user.profile.maximumDistance,
     _csrf: req.csrfToken()
-  });  
+  });
 };
 
 /**
@@ -146,9 +145,7 @@ exports.postUpdateProfile = function(req, res, next) {
     user.email = req.body.email || '';
     user.profile.name = req.body.name || '';
     var location = req.body.location || 45219;
-    user.profile.location = location;  
-    user.profile.latitude = zipdb.zipcode(location).latitude;
-    user.profile.longitude = zipdb.zipcode(location).longitude;
+    user.profile.location = location;
     user.profile.minimumNumBedrooms = req.body.minimumBedrooms || 1;
     user.profile.minimumNumBathrooms = req.body.minimumBathrooms || 1;
     user.profile.minimumPrice = req.body.minimumPrice || 100000;
