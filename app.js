@@ -154,7 +154,7 @@ app.get('/api/paypal/cancel', apiController.getPayPalCancel);
 app.get('/api/lob', apiController.getLob);
 app.get('/api/getHouses', apiController.getHouses);
 app.get('/api/properties', apiController.getLikedProperties)
-app.post('/api/decision/:id/:decision', apiController.makeDecision);
+app.post('/api/decision/:id/:decision', passportConf.isAuthenticated, passportConf.isAuthorized, apiController.makeDecision);
 
 /**
  * OAuth authentication routes. (Sign in)
