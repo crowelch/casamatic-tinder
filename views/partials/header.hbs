@@ -2,13 +2,13 @@
 <div class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="/" class="navbar-brand"><span class="fa fa-cube"></span>Project name</a>
+      <button type="button" data-toggle="collapse" data-target=".navbar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="/" class="navbar-brand"><span class="glyphicon glyphicon-home"></span>HouseSwipe</a>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li><a href="/">Home</a></li>
-        <li><a href="/api">API Examples</a></li>
-        <li><a href="/contact">Contact</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/matches">Matches</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         {{#unless user}}
@@ -24,7 +24,7 @@
             {{/if}}
             {{#if user.profile.name}}
               {{user.profile.name}}&nbsp;
-            {{else}} 
+            {{else}}
               {{#if user.email}}
                 {{user.email}}&nbsp;
               {{else}}
