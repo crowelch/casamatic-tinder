@@ -1,20 +1,13 @@
-lib-cov
-*.seed
-*.log
 *.csv
 *.dat
 *.out
-*.pid
 *.gz
 *.swp
 
-pids
-logs
 results
 tmp
 
 npm-debug.log
-node_modules
 .idea
 *.iml
 .DS_Store
@@ -45,4 +38,5 @@ coverage
 build/Release
 
 # Dependency directory
+node_modules
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
