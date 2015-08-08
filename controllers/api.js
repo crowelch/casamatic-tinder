@@ -720,7 +720,7 @@ exports.getHouses = function (req, res, next) {
             alreadyDecided: decidedHouses
         };
     }
-    
+
     housesFromDb(options, function (housesCursor) {
         housesCursor.toArray(function (err, houses) {
             res.send(houses);
