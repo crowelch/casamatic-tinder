@@ -164,6 +164,17 @@ exports.postUpdateProfile = function(req, res, next) {
 };
 
 
+exports.getProperties = function (req, res) {
+    res.render('account/properties', {
+        title: "I Like Big Moats and I cannot Lie",
+        properties: req.user.profile.yesVotes,
+        _csrf: req.csrfToken()
+    });
+
+
+};
+
+
 
 /**
  * POST /account/password

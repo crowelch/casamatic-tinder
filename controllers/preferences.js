@@ -1,7 +1,7 @@
 var geolib = require('geolib');
 var myJson = require('../secretJson/listings.json');
 var _ = require('lodash');
-var zipsMap = require('./zip_locations.json')
+//var zipsMap = require('../secretJson/zip_locations.json')
 
 exports.preferences = function (req, res) {
 	filter();
