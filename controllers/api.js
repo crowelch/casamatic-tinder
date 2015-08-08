@@ -695,19 +695,24 @@ exports.getLob = function (req, res, next) {
 };
 
 exports.makeDecision = function (req, res) {
+  var User = require('../models/User');
     if (req.user) {
         User.findById(req.user.id, function (err, user) {
             if (err) return console.log(err);
-            if (req.params.decision) {
-                user.profile.yesVotes.push(req.params.id);
+            var id = req.body.id;
+            console.log(id);
+            if (req.body.decision) {
+                user.profile.yesVotes.push(id);
             } else {
-                user.profile.noVotes.push(req.params.id);
+                user.profile.noVotes.push(id);
             }
             user.save(function (err) {
                 if (err) return console.log(err);
                 res.send('Kittens');
             });
         });
+    } else {
+      console.log('NOT AUTH!');
     }
 }
     exports.getHouses = function (req, res, next) {

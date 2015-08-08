@@ -24,6 +24,7 @@ Tindercardsjs = (function () {
   exports.card = function (cardid, name, desc, imgpath) {
 
     var jqo;
+    
     /**
      * Returns a jQuery representation of this card
      *
@@ -173,10 +174,8 @@ Tindercardsjs = (function () {
 
 }());
 
-var rocks;
-
 $(document).ready(function () {
-  var newCard;
+
   $.ajax({
     url: 'http://localhost:3000/api/getHouses',
     dataType: 'json',
@@ -189,21 +188,30 @@ $(document).ready(function () {
   var cards = [];
 
   function makeCard(data) {
-
+    var newCard;
+    
     data.forEach(function (elem, ind) {
-      newCard = new Tindercardsjs.card(cards.length, elem.Title, elem.Description, elem.Photos[0].Url, elem);
-      newCard.orig = elem;
+      newCard = new Tindercardsjs.card(cards.length, elem.Title, elem.Description, elem.Photos[0].Url);
       cards.push(newCard);
     });
-
-    render();
+    
+    render(data);
   }
 
-  function render() {
+  function render(locCards) {
     // Render cards
     Tindercardsjs.render(cards, $('#main'), function (event) {
-
-      console.log(event.card);
+      var decision = event.direction == 'left' ? false : true;
+      
+      var url = 'http://localhost:3000/api/decision'
+      
+      $.ajax({
+        url: url,
+        dataType: 'json',
+        data: {"id": locCards[event.cardid].ListingKey, "decision": decision},
+        type: 'POST'
+        
+      });
     });
   }
 });
