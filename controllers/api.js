@@ -720,17 +720,20 @@ exports.makeDecision = function (req, res) {
                 milesRadius: 5,
                 centerZip: 45219,
                 minBedrooms: 3,
-                minBathrooms: 2
+            minBathrooms: 2,
+            alreadyDecided: []
             };
         } else {
             var profile = user.profile;
+        var decidedHouses = profile.yesVotes.concat(profile.noVotes);
             options = {
                 minPrice: profile.minimumPrice,
                 maxPrice: profile.maximumPrice,
                 milesRadius: profile.maximumDistance,
                 centerZip: profile.location,
                 minBedrooms: profile.minimumNumBedrooms,
-                minBathrooms: profile.minimumNumBathrooms
+            minBathrooms: profile.minimumNumBathrooms,
+            alreadyDecided: decidedHouses
             };
         }
 
@@ -749,10 +752,15 @@ exports.makeDecision = function (req, res) {
     }
 
     exports.getLikedProperties = function (req, res, next) {
-        var LikedProperties = [];
+        var likedProperties = [];
         var decisions = req.body.yesVotes;
 
         if (decisions) {
+            decisions.forEach(function (value, index, arr) {
+                likedProperties.push()
+            });
             
+            res.send(decisions);
         }
     }
+

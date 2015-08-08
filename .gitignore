@@ -40,3 +40,7 @@ build/Release
 # Dependency directory
 node_modules
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+*.dll
+/obj/Debug
+/.vs/casamatic-tinder/v14
+/.vs/config
