@@ -4,13 +4,13 @@
 <form action="/account/profile" method="POST" class="form-horizontal">
   <input type="hidden" name="_csrf" value="{{_csrf}}"/>
   <div class="form-group">
-    <label for="email" class="col-sm-2 control-label">Email</label>
+    <label for="email" class="col-sm-2 control-label">Email*</label>
     <div class="col-sm-4">
       <input type="email" name="email" id="email" value="{{user.email}}" class="form-control"/>
     </div>
   </div>
   <div class="form-group">
-    <label for="name" class="col-sm-2 control-label">Name</label>
+    <label for="name" class="col-sm-2 control-label">Name*</label>
     <div class="col-sm-4">
       <input type="text" name="name" id="name" value="{{user.profile.name}}" class="form-control"/>
     </div>
@@ -24,48 +24,48 @@
         <h3>Housing Search Filter Criteria</h3>
     </div>
   <div class="form-group">
-    <label for="location" class="col-sm-2 control-label">Location</label>
+    <label for="location" class="col-sm-2 control-label">Location*</label>
     <div class="col-sm-4">
       <input type="text" name="location" id="location" value="{{user.profile.location}}" class="form-control"/>
     </div>
   </div>
     <div class="form-group">
-        <label for="minimumPrice" class="col-sm-2 control-label">Minimum Price (In USD)</label>
+        <label for="minimumPrice" class="col-sm-2 control-label">Minimum Price (In USD)*</label>
         <div class="col-sm-4">
             <input type="text" name="minimumPrice" id="minimumPrice" value="{{user.profile.minimumPrice}}" class="form-control" />
         </div>
     </div>
     <div class="form-group">
-        <label for="maximumPrice" class="col-sm-2 control-label">Maximum Price (In USD)</label>
+        <label for="maximumPrice" class="col-sm-2 control-label">Maximum Price (In USD)*</label>
         <div class="col-sm-4">
             <input type="text" name="maximumPrice" id="maximumPrice" value="{{user.profile.maximumPrice}}" class="form-control" />
         </div>
     </div>
     <div class="form-group">
-        <label for="minimumBedrooms" class="col-sm-2 control-label">Minimum Number of Bedrooms</label>
+        <label for="minimumBedrooms" class="col-sm-2 control-label">Minimum Number of Bedrooms*</label>
         <div class="col-sm-4">
             <input type="text" name="minimumBedrooms" id="minimumBedrooms" value="{{user.profile.minimumNumBedrooms}}" class="form-control" />
         </div>
     </div>
     <div class="form-group">
-        <label for="minimumBathrooms" class="col-sm-2 control-label">Minimum Number of Bathrooms</label>
+        <label for="minimumBathrooms" class="col-sm-2 control-label">Minimum Number of Bathrooms*</label>
         <div class="col-sm-4">
             <input type="text" name="minimumBathrooms" id="minimumBathrooms" value="{{user.profile.minimumNumBathrooms}}" class="form-control" />
         </div>
     </div>
 
     <div class="form-group">
-        <label for="maxDistance" class="col-sm-2 control-label">Maximum Distance</label>
+        <label for="maxDistance" class="col-sm-2 control-label">Maximum Distance*</label>
         <div class="col-sm-4">
             <select name="maximumDistance">
                 <option value="x15" id="maximumDistance"> </option>
-                <option value="5" id="maximumDistance">5</option>
+                <option value="5" id="maximumDistance" selected>5</option>
                 <option value="10" id="maximumDistance">10</option>
                 <option value="15" id="maximumDistance">15</option>
                 <option value="20" id="maximumDistance">20</option>
                 <option value="50" id="maximumDistance">50</option>
                 <option value="100" id="maximumDistance">100</option>
-            </select>        
+            </select>
         </div>
     </div>
 
