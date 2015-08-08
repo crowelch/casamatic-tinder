@@ -34,7 +34,7 @@ Tindercardsjs = (function () {
      */
     this.tojQuery = function () {
       if (!jqo) {
-        jqo = $('<div class="tc-card">').attr('data-cardid', cardid).html('<div class="tc-card-img-cont"><img src="' + imgpath + '" class="tc-card-img"><div class="tc-card-body"><h2 class="tc-card-name">' + name + '</h2><span class="tc-card-desc">' + desc + '</span></div></div>');
+        jqo = $('<div class="tc-card">').attr('data-cardid', cardid).html('<div class="tc-card-img-cont"><img style="margin: 0 auto" src="' + imgpath + '" class="tc-card-img"><div class="tc-card-body"><h2 class="tc-card-name">' + name + '</h2><span class="tc-card-desc">' + desc + '</span></div></div>');
       }
       return jqo;
     };
@@ -133,9 +133,9 @@ Tindercardsjs = (function () {
       for (i = 0; i < cards.length; i = i + 1) {
         $card = cards[i].tojQuery().appendTo($target).css({
           'position': 'absolute',
-          'border': '1px solid #666',
-          'border-radius': '10px',
-          'background-color': '#fff',
+          'border-radius': '3px',
+          'background-color': 'white',
+          'opacity': '100%',
           'height': '430px',
           'left': '10px',
           'top': '10px',
@@ -143,13 +143,14 @@ Tindercardsjs = (function () {
         });
         
         $card.find('.tc-card-img').css({
-          'width': '100%',
-          'border-radius': '10px 10px 0 0'
+          'width': '95%',
+          'margin': '0 auto'
         });
         
         $card.find('.tc-card-name').css({
           'margin-top': '0',
-          'margin-bottom': '5px'
+          'margin-bottom': '5px',
+          'color': '#FF6019'
         });
         
         $card.find('.tc-card-body').css({
