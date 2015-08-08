@@ -700,7 +700,7 @@ exports.getHouses = function (req, res, next) {
     var options = {
         minPrice: 100000,
         maxPrice: 200000,
-        milesRadius: 1,
+        milesRadius: 5,
         centerZip: 45219,
         minBedrooms: 3,
         minBathrooms: 2
