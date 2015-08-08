@@ -12,9 +12,9 @@ var Tindercardsjs = Tindercardsjs || {};
 
 Tindercardsjs = (function () {
   'use strict';
-  
+
   var exports = {};
-  
+
   /**
    * Represents one card
    *
@@ -22,7 +22,7 @@ Tindercardsjs = (function () {
    * @class
    */
   exports.card = function (cardid, name, desc, imgpath) {
-    
+
     var jqo;
     /**
      * Returns a jQuery representation of this card
@@ -39,7 +39,7 @@ Tindercardsjs = (function () {
     };
 
   };
-  
+
   /**
    * Initializes swipe
    *
@@ -112,7 +112,7 @@ Tindercardsjs = (function () {
       });
     });
   }
-  
+
   /**
    * Renders the given cards
    *
@@ -127,11 +127,12 @@ Tindercardsjs = (function () {
   exports.render = function (cards, $target, onSwiped) {
     var i,
       $card;
-    
+
     if (cards) {
       for (i = 0; i < cards.length; i = i + 1) {
         $card = cards[i].tojQuery().appendTo($target).css({
           'position': 'absolute',
+          'border': '15px solid #b1fff5',
           'border-radius': '3px',
           'background-color': 'white',
           'opacity': '100%',
@@ -140,36 +141,36 @@ Tindercardsjs = (function () {
           'top': '10px',
           'right': '10px',
         });
-        
+
         $card.find('.tc-card-img').css({
-          'width': '95%',
+          'width': '100%',
           'margin': '0 auto'
         });
-        
+
         $card.find('.tc-card-name').css({
           'margin-top': '0',
           'margin-bottom': '5px',
           'color': '#FF6019'
         });
-        
+
         $card.find('.tc-card-body').css({
           'position': 'relative',
           'left': '10px',
           'width': '280px',
           'height': '100%'
         });
-        
+
       }
-      
+
       initSwipe(onSwiped);
-      
+
     } else {
       console.warn('tindercards array empty, no cards will be displayed');
     }
   };
-  
+
   return exports;
-  
+
 }());
 
 var rocks;
@@ -186,22 +187,22 @@ $(document).ready(function () {
   });
 
   var cards = [];
-  
+
   function makeCard(data) {
-    
+
     data.forEach(function (elem, ind) {
       newCard = new Tindercardsjs.card(cards.length, elem.Title, elem.Description, elem.Photos[0].Url, elem);
       newCard.orig = elem;
       cards.push(newCard);
     });
-    
+
     render();
   }
 
   function render() {
     // Render cards
     Tindercardsjs.render(cards, $('#main'), function (event) {
-      
+
       console.log(event.card);
     });
   }
