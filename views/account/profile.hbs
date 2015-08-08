@@ -1,4 +1,3 @@
-
 <div class="page-header">
   <h3>Profile Information</h3>
 </div>
@@ -16,38 +15,64 @@
       <input type="text" name="name" id="name" value="{{user.profile.name}}" class="form-control"/>
     </div>
   </div>
-  <div class="form-group">
-    <label for="gender" class="col-sm-2 control-label">Gender</label>
-    <div class="col-sm-4">
-      <label class="radio col-sm-4">
-        <input type="radio" name="gender" value="male" data-toggle="radio" {{setChecked 'male' user.profile.gender}}/><span>Male</span>
-      </label>
-      <label class="radio col-sm-4">
-        <input type="radio" name="gender" value="female" data-toggle="radio" {{setChecked 'female'  user.profile.gender}}/><span>Female</span>
-      </label>
+    <div class="form-group">
+        <label for="gravatar" class="col-sm-2 control-label">Gravatar</label>
+        <div class="col-sm-4"><img src="{{getGravatarURL user 100}}" width="100" height="100" class="profile" /></div>
     </div>
-  </div>
+
+    <div class="page-header">
+        <h3>Housing Search Filter Criteria</h3>
+    </div>
   <div class="form-group">
     <label for="location" class="col-sm-2 control-label">Location</label>
     <div class="col-sm-4">
       <input type="text" name="location" id="location" value="{{user.profile.location}}" class="form-control"/>
     </div>
   </div>
-  <div class="form-group">
-    <label for="website" class="col-sm-2 control-label">Website</label>
-    <div class="col-sm-4">
-      <input type="text" name="website" id="website" value="{{user.profile.website}}" class="form-control"/>
+    <div class="form-group">
+        <label for="minimumPrice" class="col-sm-2 control-label">Minimum Price (In USD)</label>
+        <div class="col-sm-4">
+            <input type="text" name="minimumPrice" id="minimumPrice" value="{{user.profile.minimumPrice}}" class="form-control" />
+        </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="gravatar" class="col-sm-2 control-label">Gravatar</label>
-    <div class="col-sm-4"><img src="{{getGravatarURL user 100}}" width="100" height="100" class="profile"/></div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-4">
-      <button type="submit" class="btn btn btn-primary"><span class="fa fa-pencil"></span>Update Profile</button>
+    <div class="form-group">
+        <label for="maximumPrice" class="col-sm-2 control-label">Maximum Price (In USD)</label>
+        <div class="col-sm-4">
+            <input type="text" name="maximumPrice" id="maximumPrice" value="{{user.profile.maximumPrice}}" class="form-control" />
+        </div>
     </div>
-  </div>
+    <div class="form-group">
+        <label for="minimumBedrooms" class="col-sm-2 control-label">Minimum Number of Bedrooms</label>
+        <div class="col-sm-4">
+            <input type="text" name="minimumBedrooms" id="minimumBedrooms" value="{{user.profile.minimumNumBedrooms}}" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="minimumBathrooms" class="col-sm-2 control-label">Minimum Number of Bathrooms</label>
+        <div class="col-sm-4">
+            <input type="text" name="minimumBathrooms" id="minimumBathrooms" value="{{user.profile.minimumNumBathrooms}}" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="maxDistance" class="col-sm-2 control-label">Maximum Distance</label>
+        <div class="col-sm-4">
+            <select>
+                <option id="maximumDistance">5</option>
+                <option id="maximumDistance">10</option>
+                <option id="maximumDistance">15</option>
+                <option id="maximumDistance">20</option>
+                <option id="maximumDistance">50</option>
+                <option id="maximumDistance">100</option>
+            </select>        
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-4">
+            <button type="submit" class="btn btn btn-primary"><span class="fa fa-pencil"></span>Save Profile</button>
+        </div>
+    </div>
 </form>
 <div class="page-header">
   <h3>Change Password</h3>
@@ -80,12 +105,3 @@
   <input type="hidden" name="_csrf" value="{{_csrf}}"/>
   <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span>Delete my account</button>
 </form>
-<div class="page-header">
-  <h3>Linked Accounts</h3>
-</div>
-<p><a href="/auth/instagram">Link your Instagram account</a></p>
-<p><a href="/auth/google">Link your Google account</a></p>
-<p><a href="/auth/facebook">Link your Facebook account</a></p>
-<p><a href="/auth/twitter">Link your Twitter account</a></p>
-<p><a href="/auth/github">Link your GitHub account</a></p>
-<p><a href="/auth/linkedin">Link your LinkedIn account</a></p>

@@ -26,7 +26,7 @@
     "express-flash": "^0.0.2",
     "express-handlebars": "^2.0.0",
     "express-session": "^1.10.4",
-    "express-validator": "^2.9.0",
+    "express-validator": "^2.14.0",
     "fbgraph": "^0.3.0",
     "github-api": "^0.10.4",
     "hbs": "^3.0.1",
@@ -60,7 +60,8 @@
     "twit": "^1.1.20",
     "uglify-js": "^2.4.19",
     "validator": "^3.36.0",
-    "yui": "^3.18.1"
+    "yui": "^3.18.1",
+    "zippity-do-dah": "0.0.2"
   },
   "devDependencies": {
     "blessed": "^0.0.51",

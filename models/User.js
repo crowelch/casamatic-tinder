@@ -16,11 +16,15 @@ var userSchema = new mongoose.Schema({
 
     profile: {
         name: { type: String, default: '' },
-        location: { type: String, default: '' },
-        minimumPrice: {type: String, default: ''},
-        maximumPrice: { type: String, default: '' },
-        minimumNumBed
-        picture: { type: String, default: '' }
+        location: { type: Number, default: 45219 },
+        maximumDistance: {type: Number, default: 1 },
+        minimumPrice: { type: Number, default: 100000 },
+        maximumPrice: { type: Number, default: 100000 },
+        minimumNumBedrooms: { type: Number, default: 1 },
+        minimumNumBathrooms: { type: Number, default: 1},
+        picture: { type: String, default: '' },
+            latitude: { type: String, default: '' },
+            longitude: {type: String,default: ''}
   },
 
   resetPasswordToken: String,

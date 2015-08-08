@@ -5,6 +5,7 @@ var nodemailer = require('nodemailer');
 var passport = require('passport');
 var User = require('../models/User');
 var secrets = require('../config/secrets');
+var zipdb = require('zippity-do-dah');
 
 /**
  * GET /login
@@ -99,7 +100,7 @@ exports.postSignup = function(req, res, next) {
       if (err) return next(err);
       req.logIn(user, function(err) {
         if (err) return next(err);
-        res.redirect('/');
+        res.redirect('/account');
       });
     });
   });
@@ -122,12 +123,19 @@ exports.getAccount = function(req, res) {
  */
 exports.postUpdateProfile = function(req, res, next) {
   User.findById(req.user.id, function(err, user) {
-    if (err) return next(err);
+      if (err) return next(err);
+
     user.email = req.body.email || '';
     user.profile.name = req.body.name || '';
-    user.profile.gender = req.body.gender || '';
-    user.profile.location = req.body.location || '';
-    user.profile.website = req.body.website || '';
+    var location = req.body.location || 45219;
+    user.profile.location = location;  
+    user.profile.latitude = zipdb.zipcode(location).latitude;
+    user.profile.longitude = zipdb.zipcode(location).longitude;
+    user.profile.minimumNumBedrooms = req.body.minimumBedrooms || 1;
+    user.profile.minimumNumBathrooms = req.body.minimumBathrooms || 1;
+    user.profile.minimumPrice = req.body.minimumPrice || 100000;
+    user.profile.maximumPrice = req.body.maximumPrice;
+    user.profile.maximumDistance = req.body.maximumDistance || 5;
 
     user.save(function(err) {
       if (err) return next(err);
@@ -136,6 +144,8 @@ exports.postUpdateProfile = function(req, res, next) {
     });
   });
 };
+
+
 
 /**
  * POST /account/password
