@@ -13,7 +13,6 @@ var zipdb = require('zippity-do-dah');
  */
 exports.getLogin = function(req, res) {
   if (req.user) return res.redirect('/');
-  console.log('csrfToken = ' + req.csrfToken());
   res.render('account/login', {
     title: 'Login',
     _csrf: req.csrfToken()
@@ -112,9 +111,10 @@ exports.postSignup = function(req, res, next) {
  */
 exports.getAccount = function(req, res) {
   res.render('account/profile', {
-    title: 'Account Management',
+      title: 'Account Management',
+      maxDistance: req.user.profile.maximumDistance,
     _csrf: req.csrfToken()
-  });
+  });  
 };
 
 /**
@@ -124,6 +124,24 @@ exports.getAccount = function(req, res) {
 exports.postUpdateProfile = function(req, res, next) {
   User.findById(req.user.id, function(err, user) {
       if (err) return next(err);
+
+      req.assert("email", "Please provide a valid e-mail address.").isEmail();
+      req.assert("name", "Name must not be blank.").notEmpty();
+      req.assert("location", "Please provide a valid 5 digit zip-code.").notEmpty().isInt().len(5,5);
+      req.assert("minimumBedrooms", "Minimum number of bedrooms must be a number and not be blank.").notEmpty().isInt();
+      req.assert("minimumBathrooms", "Minimum number of bathrooms must be a number and not be blank.").notEmpty().isInt();
+      req.assert("minimumPrice", "Minimum price must be a number and not be blank.").notEmpty().isInt();
+      req.assert("maximumPrice", "Maximum price must be a number and not be blank.").notEmpty().isInt();
+      console.log(req.body);
+      req.assert("maximumDistance", "Please select a maximum distance.").isInt();
+
+      var errors = req.validationErrors();
+
+      if (errors) {
+          req.flash('errors', errors);
+          console.log(errors);
+          return res.redirect('/account');
+      }
 
     user.email = req.body.email || '';
     user.profile.name = req.body.name || '';
