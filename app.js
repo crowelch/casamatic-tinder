@@ -101,7 +101,7 @@ var csrfProtection = csrf({cookie: true});
 /**
  * Primary app routes.
  */
-//app.get('/', csrfProtection, homeController.index);
+app.get('/', csrfProtection,passportConf.isAuthenticated, homeController.index);
 app.get('/login', csrfProtection, userController.getLogin);
 app.post('/login', csrfProtection, userController.postLogin);
 app.get('/logout', csrfProtection, userController.logout);
@@ -115,11 +115,11 @@ app.get('/contact', csrfProtection, contactController.getContact);
 app.post('/contact', contactController.postContact);
 app.get('/account', csrfProtection, passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);
+app.get('/account/properties', csrfProtection, passportConf.isAuthenticated, userController.getProperties);
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', csrfProtection, passportConf.isAuthenticated, userController.getOauthUnlink);
 app.get('/swipe', swipeController.swipe);
-app.get('/', csrfProtection, preferenceController.preferences);
 
 /**
  * API examples routes.

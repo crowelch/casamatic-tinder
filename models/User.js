@@ -3,23 +3,30 @@ var crypto = require('crypto');
 var mongoose = require('mongoose');
 
 var userSchema = new mongoose.Schema({
-  email: { type: String, unique: true, lowercase: true },
-  password: String,
+    email: { type: String, unique: true, lowercase: true },
+    password: String,
 
-  facebook: String,
-  twitter: String,
-  google: String,
-  github: String,
-  instagram: String,
-  linkedin: String,
-  tokens: Array,
+    facebook: String,
+    twitter: String,
+    google: String,
+    github: String,
+    instagram: String,
+    linkedin: String,
+    tokens: Array,
 
-  profile: {
-    name: { type: String, default: '' },
-    gender: { type: String, default: '' },
-    location: { type: String, default: '' },
-    website: { type: String, default: '' },
-    picture: { type: String, default: '' }
+    profile: {
+        name: { type: String, default: '' },
+        location: { type: Number, default: 45219 },
+        maximumDistance: {type: Number, default: 0 },
+        minimumPrice: { type: Number, default: 100000 },
+        maximumPrice: { type: Number, default: 100000 },
+        minimumNumBedrooms: { type: Number, default: 1 },
+        minimumNumBathrooms: { type: Number, default: 1},
+        picture: { type: String, default: '' },
+        latitude: { type: String, default: '' },
+        longitude: { type: String, default: '' },
+        yesVotes: { type: Array, default: [] },
+        noVotes: {type: Array, default: []}
   },
 
   resetPasswordToken: String,
@@ -57,10 +64,8 @@ userSchema.methods.comparePassword = function(candidatePassword, cb) {
  */
 userSchema.methods.gravatar = function(size) {
   if (!size) size = 200;
-  console.log(this)
   if (!this.email) return 'https://gravatar.com/avatar/?s=' + size + '&d=retro';
   var md5 = crypto.createHash('md5').update(this.email).digest('hex');
-  console.log('gravatar md5 = ' + md5);
   return 'https://gravatar.com/avatar/' + md5 + '?s=' + size + '&d=retro';
 };
 
