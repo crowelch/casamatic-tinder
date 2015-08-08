@@ -21,7 +21,7 @@
 
 module.exports = {
 
-  db: process.env.MONGODB || 'mongodb://localhost:27017/test',
+  db: process.env.MONGODB || 'mongodb://hack:curtis@apollo.modulusmongo.net:27017/yv3ubygU',
 
   sessionSecret: process.env.SESSION_SECRET || 'abc',
 

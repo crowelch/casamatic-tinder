@@ -1,8 +1,7 @@
-var zippity = require('zippity-do-dah');
 var geolib = require('geolib');
 var firebase = require('firebase');
 var myFirebase = new firebase('https://casmastic.firebaseio.com/');
-var myJson = require('../secretJson/listings.json');
+var myJson = require('../secretJson/listings');
 var _ = require('lodash');
 
 exports.preferences = function(req, res) {
@@ -36,8 +35,4 @@ function filter() {
 	console.log(myJson.length);
 	console.log(myHouses.length);
 	console.log(Date.now() - startTime);
-}
-
-function zipMe(zipcode) {
-	return zippity.zipcode(zipcode)
 }
