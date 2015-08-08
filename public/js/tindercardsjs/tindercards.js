@@ -34,7 +34,7 @@ Tindercardsjs = (function () {
      */
     this.tojQuery = function () {
       if (!jqo) {
-        jqo = $('<div class="tc-card">').attr('data-cardid', cardid).html('<div class="tc-card-img-cont"><img style="margin: 0 auto" src="' + imgpath + '" class="tc-card-img"><div class="tc-card-body"><h2 class="tc-card-name">' + name + '</h2><span class="tc-card-desc">' + desc + '</span></div></div>');
+        jqo = $('<div class="tc-card">').attr('data-cardid', cardid).html('<div class="tc-card-img-cont"><img src="' + imgpath + '" class="tc-card-img"><div class="tc-card-body"><h2 class="tc-card-name">' + name + '</h2><span class="tc-card-desc">' + desc + '</span></div></div>');
       }
       return jqo;
     };
@@ -136,10 +136,10 @@ Tindercardsjs = (function () {
           'border-radius': '3px',
           'background-color': 'white',
           'opacity': '100%',
-          'height': '430px',
+          'height': '100%',
           'left': '10px',
           'top': '10px',
-          'right': '10px'
+          'right': '10px',
         });
         
         $card.find('.tc-card-img').css({
@@ -156,7 +156,8 @@ Tindercardsjs = (function () {
         $card.find('.tc-card-body').css({
           'position': 'relative',
           'left': '10px',
-          'width': '280px'
+          'width': '280px',
+          'height': '100%'
         });
         
       }
@@ -171,3 +172,38 @@ Tindercardsjs = (function () {
   return exports;
   
 }());
+
+$(document).ready(function () {
+
+  $.ajax({
+    url: 'https://casmastic.firebaseio.com/5.json',
+    dataType: 'json',
+    success: function(response) {
+      console.log(response)
+      makeCard(response);
+    }
+  });
+
+  var cards = [];
+  
+  function makeCard(data) {
+    console.log(data.Photos[0].Url);
+    
+    var newCard;
+    
+    data.forEach(function (elem, ind) {
+      newCard = new Tindercardsjs.card(cards.length, elem.Title, elem.Description, elem.Photos[0].Url);
+      cards.push(newCard);
+    });
+    
+    render();
+  }
+
+  function render() {
+    // Render cards
+    Tindercardsjs.render(cards, $('#main'), function (event) {
+      console.log('Swiped ' + event.direction + ', cardid is ' + event.cardid + ' and target is:');
+      console.log(event.card);
+    });
+  }
+});
