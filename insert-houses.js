@@ -2,7 +2,7 @@
 var MongoClient = require('mongodb').MongoClient
   , assert = require('assert');
 
-var url = 'mongodb://localhost:27017/test';
+var url = 'mongodb://hack:curtis@apollo.modulusmongo.net:27017/yv3ubygU';
 
 var insertDocuments = function (db, callback) {
     housesArray.forEach(function (house) {
@@ -28,6 +28,7 @@ MongoClient.connect(url, function (err, db) {
     console.log("Connected correctly to server");
 
     insertDocuments(db, function () {
+        db.getCollection('houses').createIndex({ "loc": "2dsphere" });
         db.close();
     });
 });

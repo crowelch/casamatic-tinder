@@ -24,7 +24,6 @@ Tindercardsjs = (function () {
   exports.card = function (cardid, name, desc, imgpath) {
     
     var jqo;
-    
     /**
      * Returns a jQuery representation of this card
      *
@@ -133,29 +132,31 @@ Tindercardsjs = (function () {
       for (i = 0; i < cards.length; i = i + 1) {
         $card = cards[i].tojQuery().appendTo($target).css({
           'position': 'absolute',
-          'border': '1px solid #666',
-          'border-radius': '10px',
-          'background-color': '#fff',
-          'height': '430px',
+          'border-radius': '3px',
+          'background-color': 'white',
+          'opacity': '100%',
+          'height': '100%',
           'left': '10px',
           'top': '10px',
-          'right': '10px'
+          'right': '10px',
         });
         
         $card.find('.tc-card-img').css({
-          'width': '100%',
-          'border-radius': '10px 10px 0 0'
+          'width': '95%',
+          'margin': '0 auto'
         });
         
         $card.find('.tc-card-name').css({
           'margin-top': '0',
-          'margin-bottom': '5px'
+          'margin-bottom': '5px',
+          'color': '#FF6019'
         });
         
         $card.find('.tc-card-body').css({
           'position': 'relative',
           'left': '10px',
-          'width': '280px'
+          'width': '280px',
+          'height': '100%'
         });
         
       }
@@ -170,3 +171,38 @@ Tindercardsjs = (function () {
   return exports;
   
 }());
+
+var rocks;
+
+$(document).ready(function () {
+  var newCard;
+  $.ajax({
+    url: 'http://localhost:3000/api/getHouses',
+    dataType: 'json',
+    success: function(response) {
+      console.log(response)
+      makeCard(response);
+    }
+  });
+
+  var cards = [];
+  
+  function makeCard(data) {
+    
+    data.forEach(function (elem, ind) {
+      newCard = new Tindercardsjs.card(cards.length, elem.Title, elem.Description, elem.Photos[0].Url, elem);
+      newCard.orig = elem;
+      cards.push(newCard);
+    });
+    
+    render();
+  }
+
+  function render() {
+    // Render cards
+    Tindercardsjs.render(cards, $('#main'), function (event) {
+      
+      console.log(event.card);
+    });
+  }
+});

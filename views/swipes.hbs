@@ -12,6 +12,7 @@
       body{
         font-family: 'Helvetica-Neue', 'HelveticaNeue', arial, sans-serif;
         color: #434343;
+        background-color: '#BEBBBB';
       }
 
       .tc-card-name{
@@ -22,9 +23,10 @@
         position:relative;
         width:320px;
         height:480px;
-        left:50%;
-        margin-left:-160px;
+        margin: 0 auto;
       }
+      
+      
     </style>
 
   </head>
@@ -36,42 +38,6 @@
     <script src="js/jquery/jquery.min.js"></script>
     <script src="js/hammer/hammer.min.js"></script>
     <script src="js/tindercardsjs/tindercards.js"></script>
-
-    <script>
-      $(document).ready(function () {
-
-        $.ajax({
-          url: 'https://casmastic.firebaseio.com/1.json',
-          dataType: 'json',
-          success: function(response) {
-            console.log(response)
-            makeCard(response);
-          }
-        });
-
-        // Define cards
-        var cards = [
-          new Tindercardsjs.card(2, 'Little House', 'On the prairie', ''),
-          new Tindercardsjs.card(1, 'Agro Picard', 'Hates Klingons, likes beer.', 'gfx/pics/02.jpg'),
-          new Tindercardsjs.card(0, 'Jean-Luc, Worf & William', 'Swipe right if you also like funny hats like us :D', 'gfx/pics/03.jpg')
-        ];
-
-        function makeCard(data) {
-          console.log(data.Photos[0].Url);
-          var newCard = new Tindercardsjs.card(cards.length, data.Title, data.Description, data.Photos[0].Url);
-          cards.push(newCard);
-          render();
-        }
-
-        function render() {
-          // Render cards
-          Tindercardsjs.render(cards, $('#main'), function (event) {
-            console.log('Swiped ' + event.direction + ', cardid is ' + event.cardid + ' and target is:');
-            console.log(event.card);
-          });
-        }
-      });
-    </script>
 
   </body>
 
