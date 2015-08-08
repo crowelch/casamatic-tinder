@@ -100,7 +100,7 @@ var csrfProtection = csrf({cookie: true});
 /**
  * Primary app routes.
  */
-app.get('/', csrfProtection, homeController.index);
+app.get('/', csrfProtection,passportConf.isAuthenticated, homeController.index);
 app.get('/login', csrfProtection, userController.getLogin);
 app.post('/login', csrfProtection, userController.postLogin);
 app.get('/logout', csrfProtection, userController.logout);
