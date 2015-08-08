@@ -698,10 +698,10 @@ exports.makeDecision = function (req, res) {
     if (req.user) {
         User.findById(req.user.id, function (err, user) {
             if (err) return console.log(err);
-            if (req.body.yesDecision) {
-                user.profile.yesVotes.push(req.body.propertyId);
+            if (req.params.decision) {
+                user.profile.yesVotes.push(req.params.id);
             } else {
-                user.profile.noVotes.push(req.body.propertyId);
+                user.profile.noVotes.push(req.params.id);
             }
             user.save(function (err) {
                 if (err) return console.log(err);
@@ -709,38 +709,53 @@ exports.makeDecision = function (req, res) {
             });
         });
     }
-
-exports.getHouses = function (req, res, next) {
-    var user = req.user;
-    var options;
-    if (!user) {
-        options = {
-            minPrice: 100000,
-            maxPrice: 200000,
-            milesRadius: 5,
-            centerZip: 45219,
-            minBedrooms: 3,
+}
+    exports.getHouses = function (req, res, next) {
+        var user = req.user;
+        var options;
+        if (!user) {
+            options = {
+                minPrice: 100000,
+                maxPrice: 200000,
+                milesRadius: 5,
+                centerZip: 45219,
+                minBedrooms: 3,
             minBathrooms: 2,
             alreadyDecided: []
-        };
-    } else {
-        var profile = user.profile;
+            };
+        } else {
+            var profile = user.profile;
         var decidedHouses = profile.yesVotes.concat(profile.noVotes);
-        options = {
-            minPrice: profile.minimumPrice,
-            maxPrice: profile.maximumPrice,
-            milesRadius: profile.maximumDistance,
-            centerZip: profile.location,
-            minBedrooms: profile.minimumNumBedrooms,
+            options = {
+                minPrice: profile.minimumPrice,
+                maxPrice: profile.maximumPrice,
+                milesRadius: profile.maximumDistance,
+                centerZip: profile.location,
+                minBedrooms: profile.minimumNumBedrooms,
             minBathrooms: profile.minimumNumBathrooms,
             alreadyDecided: decidedHouses
-        };
+            };
+        }
+
+        housesFromDb(options, function (housesCursor) {
+            housesCursor.toArray(function (err, houses) {
+                res.send(houses);
+            });
+        });
     }
 
-    housesFromDb(options, function (housesCursor) {
-        housesCursor.toArray(function (err, houses) {
-            res.send(houses);
-        });
-    });
-}
+    exports.getHouse = function (req, res, next) {
+        var user = req.user;
+        if (user) {
+
+        }
+    }
+
+    exports.getLikedProperties = function (req, res, next) {
+        var LikedProperties = [];
+        var decisions = req.body.yesVotes;
+
+        if (decisions) {
+            
+        }
 }
