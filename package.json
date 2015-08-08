@@ -28,6 +28,8 @@
     "express-session": "^1.10.4",
     "express-validator": "^2.9.0",
     "fbgraph": "^0.3.0",
+    "firebase": "^2.2.9",
+    "geolib": "^2.0.18",
     "github-api": "^0.10.4",
     "hbs": "^3.0.1",
     "instagram-node": "^0.5.6",
