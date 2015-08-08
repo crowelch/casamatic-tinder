@@ -696,16 +696,28 @@ exports.getLob = function (req, res, next) {
 
 exports.getHouses = function (req, res, next) {
     var user = req.user;
+    var options;
+    if (!user) {
+        options = {
+            minPrice: 100000,
+            maxPrice: 200000,
+            milesRadius: 5,
+            centerZip: 45219,
+            minBedrooms: 3,
+            minBathrooms: 2
+        };
+    } else {
+        var profile = user.profile;
+        options = {
+            minPrice: profile.minimumPrice,
+            maxPrice: profile.maximumPrice,
+            milesRadius: profile.maximumDistance,
+            centerZip: profile.location,
+            minBedrooms: profile.minimumNumBedrooms,
+            minBathrooms: profile.minimumNumBathrooms
+        };
+    }
     
-    var options = {
-        minPrice: 100000,
-        maxPrice: 200000,
-        milesRadius: 1,
-        centerZip: 45219,
-        minBedrooms: 3,
-        minBathrooms: 2
-    };
-
     housesFromDb(options, function (housesCursor) {
         housesCursor.toArray(function (err, houses) {
             res.send(houses);

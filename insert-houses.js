@@ -28,6 +28,7 @@ MongoClient.connect(url, function (err, db) {
     console.log("Connected correctly to server");
 
     insertDocuments(db, function () {
+        db.getCollection('houses').createIndex({ "loc": "2dsphere" });
         db.close();
     });
 });
